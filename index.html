@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global History Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        label {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        input {
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 300px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+        }
+        #image {
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <label id="question"></label>
+    <input type="text" id="answer">
+    <button id="submit">Submit</button>
+    <div id="result"></div>
+    <img id="image" width="200" height="200">
+
+    <script>
+        const questions = [
+            "In which year did the fall of the Berlin Wall occur?",
+            "Which ancient civilization built the Pyramids of Giza?",
+            "What was the name of the ship that Charles Darwin sailed on during his scientific voyage?",
+            "In which country did the Industrial Revolution begin?",
+            "Who was the first emperor of Rome?",
+            "What was the name of the battle in 1066 that led to the Norman Conquest of England?",
+            "Which explorer is credited with discovering America in 1492?",
+            "What was the name of the treaty that ended World War I?",
+            "In which city was the Declaration of Independence signed?",
+            "Which dynasty ruled China for the longest period?",
+            "What was the name of the ancient Greek philosopher who tutored Alexander the Great?",
+            "In which year did the Russian Revolution take place?",
+            "Which country was the first to give women the right to vote?",
+            "What was the name of the ancient Mayan city known for its pyramid, El Castillo?",
+            "Who painted the Mona Lisa?",
+            "In which year did the Battle of Waterloo take place?",
+            "Which ancient civilization was known for its aqueducts and road systems?",
+            "What was the name of the ship that brought the Pilgrims to America in 1620?",
+            "Which city was the capital of the Byzantine Empire?",
+            "Who was the leader of the Indian independence movement and advocate of non - violent resistance?",
+            "In which year did the United States drop atomic bombs on Hiroshima and Nagasaki?",
+            "Which ancient civilization developed the first system of writing, cuneiform?",
+            "What was the name of the ancient Roman amphitheater where gladiatorial contests were held?",
+            "Which explorer circumnavigated the globe for the first time?",
+            "In which country did the French Revolution start?",
+            "Who was the first president of the United States?",
+            "What was the name of the ancient Egyptian queen who had a relationship with Julius Caesar and Mark Antony?",
+            "In which year did the Vietnam War end?",
+            "Which ancient civilization was located on the island of Crete?",
+            "What was the name of the ancient Greek battle where a small force of Spartans held off a much larger Persian army?",
+            "Who was the inventor of the telephone?",
+            "In which year did the Cuban Missile Crisis occur?",
+            "Which ancient civilization was known for its floating gardens, chinampas?",
+            "What was the name of the ancient Roman general who crossed the Rubicon River?",
+            "Which explorer discovered the sea route to India?",
+            "In which country did the Boxer Rebellion take place?",
+            "Who was the leader of the Nazi Party in Germany?",
+            "What was the name of the ancient Chinese philosophy based on the teachings of Confucius?",
+            "In which year did the Korean War end?",
+            "Which ancient civilization was located in present - day Peru and is known for Machu Picchu?",
+            "What was the name of the ancient Greek mathematician who discovered the principle of buoyancy?",
+            "Who was the first woman to fly solo across the Atlantic Ocean?",
+            "In which year did the Six - Day War take place?",
+            "Which ancient civilization was known for its elaborate headdresses and ball games?",
+            "What was the name of the ancient Roman law code that influenced many modern legal systems?",
+            "Which explorer reached the South Pole first?",
+            "In which country did the Rwandan Genocide take place?",
+            "Who was the author of the Communist Manifesto?",
+            "What was the name of the ancient Chinese wall built for defense?",
+            "In which year did the Gulf War start?",
+            "Which ancient civilization was located in Mesoamerica and is known for its calendar system?"
+        ];
+        const answers = [
+            "1989",
+            "Ancient Egyptians",
+            "HMS Beagle",
+            "United Kingdom",
+            "Augustus",
+            "Battle of Hastings",
+            "Christopher Columbus",
+            "Treaty of Versailles",
+            "Philadelphia",
+            "Zhou Dynasty",
+            "Aristotle",
+            "1917",
+            "New Zealand",
+            "Chichen Itza",
+            "Leonardo da Vinci",
+            "1815",
+            "Ancient Romans",
+            "Mayflower",
+            "Constantinople",
+            "Mahatma Gandhi",
+            "1945",
+            "Sumerians",
+            "Colosseum",
+            "Ferdinand Magellan",
+            "France",
+            "George Washington",
+            "Cleopatra",
+            "1975",
+            "Minoans",
+            "Battle of Thermopylae",
+            "Alexander Graham Bell",
+            "1962",
+            "Aztecs",
+            "Julius Caesar",
+            "Vasco da Gama",
+            "China",
+            "Adolf Hitler",
+            "Confucianism",
+            "1953",
+            "Inca",
+            "Archimedes",
+            "Amelia Earhart",
+            "1967",
+            "Maya",
+            "Twelve Tables",
+            "Roald Amundsen",
+            "Rwanda",
+            "Karl Marx and Friedrich Engels",
+            "Great Wall of China",
+            "1990",
+            "Maya"
+        ];
+        const imageNames = [
+            "berlin_wall.jpg",
+            "pyramids_of_giza.jpg",
+            "hms_beagle.jpg",
+            "industrial_revolution.jpg",
+            "augustus.jpg",
+            "battle_of_hastings.jpg",
+            "christopher_columbus.jpg",
+            "treaty_of_versailles.jpg",
+            "philadelphia.jpg",
+            "zhou_dynasty.jpg",
+            "aristotle.jpg",
+            "russian_revolution.jpg",
+            "new_zealand.jpg",
+            "chichen_itza.jpg",
+            "leonardo_da_vinci.jpg",
+            "battle_of_waterloo.jpg",
+            "roman_aqueduct.jpg",
+            "mayflower.jpg",
+            "constantinople.jpg",
+            "mahatma_gandhi.jpg",
+            "hiroshima_nagasaki.jpg",
+            "sumerians.jpg",
+            "colosseum.jpg",
+            "ferdinand_magellan.jpg",
+            "french_revolution.jpg",
+            "george_washington.jpg",
+            "cleopatra.jpg",
+            "vietnam_war.jpg",
+            "minoans.jpg",
+            "battle_of_thermopylae.jpg",
+            "alexander_graham_bell.jpg",
+            "cuban_missile_crisis.jpg",
+            "aztecs.jpg",
+            "julius_caesar.jpg",
+            "vasco_da_gama.jpg",
+            "boxer_rebellion.jpg",
+            "adolf_hitler.jpg",
+            "confucianism.jpg",
+            "korean_war.jpg",
+            "inca.jpg",
+            "archimedes.jpg",
+            "amelia_earhart.jpg",
+            "six_day_war.jpg",
+            "maya.jpg",
+            "twelve_tables.jpg",
+            "roald_amundsen.jpg",
+            "rwanda_genocide.jpg",
+            "karl_marx.jpg",
+            "great_wall_of_china.jpg",
+            "gulf_war.jpg",
+            "maya_calendar.jpg"
+        ];
+
+        let currentQuestionIndex = 0;
+        document.getElementById('question').textContent = questions[currentQuestionIndex];
+        loadAndDisplayImage();
+
+        function loadAndDisplayImage() {
+            const imageName = imageNames[currentQuestionIndex];
+            const image = document.getElementById('image');
+            image.src = 'images/' + imageName;
+            image.onerror = function() {
+                image.alt = "Image not found";
+            };
+        }
+
+        document.getElementById('submit').addEventListener('click', function() {
+            const userAnswer = document.getElementById('answer').value.trim();
+            const correctAnswer = answers[currentQuestionIndex];
+            const resultDiv = document.getElementById('result');
+            if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+                resultDiv.textContent = "Correct!";
+            } else {
+                resultDiv.textContent = "Incorrect. The correct answer is: " + correctAnswer;
+            }
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                document.getElementById('question').textContent = questions[currentQuestionIndex];
+                document.getElementById('answer').value = "";
+                loadAndDisplayImage();
+            } else {
+                alert("Quiz completed!");
+                location.reload();
+            }
+        });
+    </script>
+</body>
+</html>
